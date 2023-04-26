@@ -1,11 +1,12 @@
 import subprocess
 
 #######################
-series = "Crazy facts that you did not know"
-part = 4
+series = "????"
+part = 1
 outro = "Follow us for more"
 outfile = f"text_{part}.mp3"
-path = f"F:\\Vari Progetti\\AI_YouTube\\source\\{outfile}"
+path = f"C:\\Users\\Mario\\Desktop\\Tiktok\\ChatGPT-TikTok\\audio{outfile}"
+
 #######################
 
 with open('script.txt', 'r') as file:

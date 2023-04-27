@@ -21,7 +21,7 @@ path = f"{outfile}"
 async def main():
     text = get_file_text()
     final_text = create_full_text(text)
-    await tts(final_text, outfile=outfile)
+    await tts(final_text, outfile=outfile, debug=True)
     return True
 
 def get_file_text(filename: str = "script.txt") -> str:
@@ -33,12 +33,16 @@ def create_full_text(text: str) -> str:
     final_text = f"{series} Part {part}.\n{text}\n{outro}"
     return final_text
 
-async def tts(final_text: str, voice: str = "en-US-ChristopherNeural", random_voice: bool = False, stdout: bool = False, outfile: str = "tts.mp3"):
+async def tts(final_text: str, voice: str = "en-US-ChristopherNeural", random_voice: bool = False, stdout: bool = False, outfile: str = "tts.mp3", debug: bool = False):
     voices = await VoicesManager.create()
     if random_voice:
         voices = voices.find(Gender="Male", Locale="en-US")
         voice = random.choice(voices)["Name"]
     communicate = edge_tts.Communicate(final_text, voice)
+
+    if debug:
+        print(communicate.text)
+
     if not stdout:
         await communicate.save(outfile)
     return True
